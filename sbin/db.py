@@ -18,7 +18,7 @@ for each in os.listdir('/appl/hadouken/json/'):
         os.chdir(r'/appl/hadouken/json/')
         with open(each, 'r') as fp:
             hadouken = json.load(fp)
-            db = sqlite3.connect('db.sqlite')
+            db = sqlite3.connect('/appl/hadouken/db/db.sqlite')
             cursor = db.cursor()
             cursor.execute(
                 'INSERT INTO info(server_name,server_release,server_site,server_vendor,server_model,server_serial,'
@@ -35,7 +35,7 @@ for each in os.listdir('/appl/hadouken/json/'):
             db.close()
 
             # move json file to out dir.
-            infile = 'json/%s' % each
-            outfile = 'tmp/%s' % each
+            infile = '/appl/hadouken/json/%s' % each
+            outfile = '/appl/hadouken/tmp/%s' % each
             shutil.move(infile, outfile)
             
