@@ -1,5 +1,5 @@
-- hosts: srv-hadouken
+- hosts: hadouken
 
   tasks:
-    - copy: src=/var/tmp/{{ ansible_hostname }}.json dest=/appl/hadouken/json/in/ mode=0644
+    - fetch: src=/var/tmp/{{ ansible_hostname }}.json dest=/appl/hadouken/json/ mode=0644
       when: ansible_os_family == "RedHat"

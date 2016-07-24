@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 # This script was tested only on RHEL 5/6/7 with python 2.6 or higher.
+# This script reads all JSON files and populate the sqlite3 database.
 
 import sqlite3
 import os
@@ -34,7 +35,7 @@ for each in os.listdir('/appl/hadouken/json/'):
             db.close()
 
             # move json file to out dir.
-            infile = 'json/in/%s' % each
-            outfile = 'json/out/%s' % each
+            infile = 'json/%s' % each
+            outfile = 'tmp/%s' % each
             shutil.move(infile, outfile)
             

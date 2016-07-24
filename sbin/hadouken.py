@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 # This script was tested only on RHEL 5/6/7 with python 2.6 or higher.
+# This script is used to collect information about RHEL servers.
 
 import platform
 import subprocess

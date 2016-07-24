@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 # This script was tested only on RHEL 5/6/7 with python 2.6 or higher.
+# Use this script with ansible to easily collect the json files from all hosts from you environment.
 
 import platform
 import subprocess
