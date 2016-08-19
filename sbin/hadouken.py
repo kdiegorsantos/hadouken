@@ -3,13 +3,15 @@
 # This script was tested only on RHEL 5/6/7 with python 2.6 or higher.
 # This script is used to collect information about RHEL servers.
 
-import platform
+# from __future__ import with_statement
+
 import subprocess
+import platform
 
 try:
     import json
 except ImportError:
-    import simplejson
+    import simplejson as json
 
 # if your server uses fqdn, you can suppress the domain, just change the bellow variable to your domain.
 domain = ".internal.timbrasil.com.br"
@@ -22,7 +24,7 @@ if platform.system() == 'Linux':
         return x.replace(domain, '').lower()
 
 
-    # in my case the first 3 letters of the server name indicates the site.
+    # in my case the first 3 letters of the server name indicates the site location.
     def get_site():
         x = platform.node()
         return x.replace(domain, '').upper()[:3]
@@ -63,7 +65,7 @@ if platform.system() == 'Linux':
         return x.strip()
 
 
-    # get wwpn.
+    # get scsi target wwpn.
     def get_fc_wwpn():
         proc = subprocess.Popen(
             ["cat /sys/class/fc_host/host*/port_name 2>/dev/null| xargs"], stdout=subprocess.PIPE, shell=True)
@@ -144,23 +146,23 @@ if platform.system() == 'Linux':
 
     # print all information on the screen.
     print(
-        "server_name: %s \n"
-        "server_release: %s \n"
-        "server_site: %s \n"
-        "server_vendor: %s \n"
-        "server_model: %s \n"
-        "server_serial: %s \n"
-        "server_cpu: %s \n"
-        "server_memory: %s \n"
-        "server_ip: %s \n"
-        "server_cluster: %s \n"
-        "server_clusternodes: %s \n"
-        "server_frame: %s \n"
-        "server_wwpn: %s \n"
-        "server_db: %s" % (
-            get_hostname(), get_release(), get_site(), get_hw_vendor(), get_hw_model(), get_hw_serialnumber(),
-            get_cpu(), get_memory(), get_ipaddr(), get_cluster(), get_clusternodes(), get_frame(),
-            get_fc_wwpn(), get_db()))
+        "server_name: {0:s} \n"
+        "server_release: {1:s} \n"
+        "server_site: {2:s} \n"
+        "server_vendor: {3:s} \n"
+        "server_model: {4:s} \n"
+        "server_serial: {5:s} \n"
+        "server_cpu: {6:s} \n"
+        "server_memory: {7:s} \n"
+        "server_ip: {8:s} \n"
+        "server_cluster: {9:s} \n"
+        "server_clusternodes: {10:s} \n"
+        "server_frame: {11:s} \n"
+        "server_wwpn: {12:s} \n"
+        "server_db: {13:s}".format(get_hostname(), get_release(), get_site(), get_hw_vendor(), get_hw_model(),
+                                  get_hw_serialnumber(),
+                                  get_cpu(), get_memory(), get_ipaddr(), get_cluster(), get_clusternodes(), get_frame(),
+                                  get_fc_wwpn(), get_db()))
 
     # create a dict to export info to sqlite db.
     hadouken = {'server_name': get_hostname(), 'server_release': get_release(), 'server_site': get_site(),
@@ -171,8 +173,8 @@ if platform.system() == 'Linux':
 
     # export hadouken info to be loaded into sqlite3.
     hadouken_file = '/var/tmp/%s.json' % get_hostname()
-    with open(hadouken_file, 'w') as fp:
-        json.dump(hadouken, fp)
+    fp = open(hadouken_file, 'w')
+    json.dump(hadouken, fp)
 
 else:
     print("OS not supported.")
