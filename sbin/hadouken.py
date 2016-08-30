@@ -1,9 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 
-# This script was tested only on RHEL 5/6/7 with python 2.6 or higher.
-# This script is used to collect information about RHEL servers.
-
-# from __future__ import with_statement
+'''
+Collect information about RHEL 5/6 and 7, it was tested with python2.x.
+'''
 
 import subprocess
 import platform
@@ -14,20 +13,20 @@ except ImportError:
     import simplejson as json
 
 # if your server uses fqdn, you can suppress the domain, just change the bellow variable to your domain.
-domain = ".internal.timbrasil.com.br"
+my_domain = ".internal.timbrasil.com.br"
 
 # checks if operating system is Linux.
 if platform.system() == 'Linux':
     # get the server name
     def get_hostname():
         x = platform.node()
-        return x.replace(domain, '').lower()
+        return x.replace(my_domain, '').lower()
 
 
     # in my case the first 3 letters of the server name indicates the site location.
     def get_site():
         x = platform.node()
-        return x.replace(domain, '').upper()[:3]
+        return x.replace(my_domain, '').upper()[:3]
 
 
     # get operation system release.

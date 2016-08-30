@@ -1,3 +1,3 @@
 # Hadouken.py
 
-This is a simple script used to collect information about RHEL servers and populate a sqlite3 database.
+Collect information about RHEL 5/6 and 7 and populate a sqlite3 database.
