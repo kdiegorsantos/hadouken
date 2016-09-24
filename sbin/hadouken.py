@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python
 
 '''
 Collect information about RHEL 5/6 and 7, it was tested with python2.x.
@@ -108,10 +108,8 @@ if platform.system() == 'Linux':
              "model_cpu=$(gawk -F: '/^model name/{{print $2; exit}}' <$cpuinfo) \n"
              "model_cpu=$(sed -e 's/(R)//g ; s/(TM)//g ; s/  */ /g ; s/^ // ; s/ 0 @//g' <<<$model_cpu) \n"
              "num_cpu=$(gawk '/^processor/{{n++}} END{{print n}}' <$cpuinfo) \n"
-             "num_cpu_phys=$(grep '^physical id' <$cpuinfo | sort -u | wc -l) \n"
              "num_cores_per_cpu=$(gawk '/^cpu cores/{{print $4; exit}}' <$cpuinfo) \n"
-             "echo -e \"${num_cpu_phys} Socket(s) ${model_cpu}/ ${c[Imp]}${num_cpu} CPU(s)/ "
-             "${num_cores_per_cpu} Core(s) per socket\""
+             "echo -e \"${num_cpu} CPU(s) ${model_cpu} / ${num_cores_per_cpu} Core(s) per socket\""
              ""], stdout=subprocess.PIPE, shell=True)
         x = proc.communicate()[0]
         return x.strip()
