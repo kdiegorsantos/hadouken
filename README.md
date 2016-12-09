@@ -45,7 +45,7 @@ Installation
 Install using ansible-galaxy.
 
 ```sh
-$ ansible-galaxy install kdiegorsantos.hadouken
+$ sudo ansible-galaxy install kdiegorsantos.hadouken
 ```
 
 Example Playbook
