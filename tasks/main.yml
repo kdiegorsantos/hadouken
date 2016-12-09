@@ -10,3 +10,4 @@
 
 - name: Updating database
   local_action: command /etc/ansible/files/bin/db.py
+
