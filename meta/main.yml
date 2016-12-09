@@ -1,0 +1,22 @@
+---
+dependencies: []
+galaxy_info:
+  author: "Diego R. Santos"
+  description: "Collect information about hardware and software from Linux servers and update a sqlite3 database with this informations."
+  license: "license MIT"
+  min_ansible_version: 1.5
+  platforms:
+    - name: EL
+      versions:
+        - 5
+        - 6
+        - 7
+    -
+  - name: Ubuntu
+     versions:
+      - precise
+      - quantal
+      - raring
+      - saucy
+  galaxy_tags:
+    - inventory
