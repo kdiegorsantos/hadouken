@@ -28,12 +28,12 @@ On the ansible server install the package sqlite3 and create a new database.
 
 Installation:
 ```sh
-# yum install sqlite3
+$ sudo yum install sqlite3
 ```
 
 Database creation:
 ```sh
-# sqlite3 files/db/db.sqlite < files/sql/create_db.sql
+$ sqlite3 files/db/db.sqlite < files/sql/create_db.sql
 ```
 
 Short example:
@@ -54,7 +54,7 @@ Example Playbook
 After change the default variables you can run this role using the ansible-playbook command.
 
 ```sh
-# ansible-playbook /etc/ansible/roles/hadouken/role.yml
+$ sudo ansible-playbook /etc/ansible/roles/hadouken/role.yml
 ```
 
 License
