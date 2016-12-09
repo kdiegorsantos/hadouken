@@ -15,7 +15,7 @@ The tasks will be the following.
 Requirements
 ------------
 
-+ ansible 1.5 or higher
++ ansible 1.4 or higher
 
 Dependencies
 ------------
