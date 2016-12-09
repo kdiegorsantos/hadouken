@@ -147,7 +147,7 @@ server_clusternodes =
         last_update = 2016-09-23
 ```
 
-If you want to query information about a host.
+If you want to query information about a host using sqlite3 directly.
 
 ```sh
 $ sqlite3 -header -column /etc/ansible/roles/files/db/db.sqlite "select * from info where server_name = 'snelnxa72'"
