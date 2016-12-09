@@ -121,6 +121,31 @@ $ cat /var/tmp/snenix002.json | python -m json.tool
 
 Example db.sqlite
 ----------------
+If you want to query over the role database use query-db.sh, just give an argument to begin the search.
+
+
+```sh
+$ /etc/ansible/roles/hadouken/files/bin/query-db.sh BRC50966F0
+          server_id = 946
+        server_name = rjolnxc15
+     server_release = Red Hat Enterprise Linux Server release 6.5 (Santiago)
+        server_site = RJO
+      server_vendor = HP
+       server_model = ProLiant DL580 Gen8
+      server_serial = BRC50966F0
+         server_cpu = 4 Socket(s) Intel Xeon CPU E7-4890 v2 @ 2.80GHz/ 120 CPU(s)/ 15 Core(s) per socket
+      server_memory = 1292 GB
+          server_ip = 10.168.34.150
+     server_cluster = 
+server_clusternodes = 
+       server_frame = 000595700042
+        server_wwpn = 5001438028cfc61c 5001438028cfc61e 5001438028cccf94 5001438028cccf96
+          server_db = 
+       server_owner = 
+        server_rack = 
+     server_console = 
+        last_update = 2016-09-23
+```
 
 If you want to query information about a host.
 
