@@ -1,5 +1,5 @@
 ---
-- name: Copying hadouken.py script
+- name: Copying hadouken.py
   template: src=/etc/ansible/roles/hadouken/files/bin/hadouken.py.j2 dest=/usr/local/bin/hadouken.py mode=0775 owner=root
 
 - name: Executing hadouken.py
