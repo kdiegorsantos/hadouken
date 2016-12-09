@@ -1,4 +1,4 @@
-hadouken
+hadouken - A simple inventory system with python and sqlite3
 ============
 
 This ansible role was made to reach the following requisites.
