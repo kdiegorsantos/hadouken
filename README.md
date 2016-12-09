@@ -20,15 +20,20 @@ Requirements
 Dependencies
 ------------
 
-+ python 2.x on servers to run the hadouken.py script.
++ python 2.x on servers to run hadouken.py.
++ dmidecode on servers to run hadouken.py.
 + python 2.7 on ansible server.
 + sqlite3 on ansible server.
 
 On the ansible server install the package sqlite3 and create a new database.
 
-Installation:
+Installation on ansible server:
 ```sh
 $ sudo yum install sqlite3
+```
+Installation on other servers:
+```sh
+$ sudo yum install dmidecode
 ```
 
 Database creation:
@@ -57,6 +62,51 @@ After change the default variables you can run this role using the ansible-playb
 
 ```sh
 $ sudo ansible-playbook /etc/ansible/roles/hadouken/role.yml
+```
+
+Example hadouken.py
+----------------
+
+If you want to run hadouken.py on a host.
+
+```sh
+$ hadouken.py
+server_name: snelnxa72 
+server_release: Red Hat Enterprise Linux Server release 5.11 (Tikanga)
+server_site: SNE
+server_vendor:  HP
+server_model:  ProLiant BL460c Gen8
+server_serial: BRC2532JH4
+server_cpu: Intel Xeon CPU E5-2650 2.00GHz / 2 Socket(s) / 32 CPU(s)/ 8 Core(s) per socket
+server_memory: 32 GB 
+server_ip: 10.168.81.77
+server_cluster: idem_cluster 
+server_clusternodes: snelnx187 snelnx189 snelnxa36 snelnxa68 snelnxa69 snelnxa70 snelnxa71 snelnxa72 snelnxa73
+server_frame: 000290102907 000592600076 000595700007 000595700008 CKM00154803864
+server_wwpn: 10006c3be5b076f1 10006c3be5b076f5 
+server_db: None
+```
+If you want to show the content of a json file generatedby hadouken.py.
+
+```sh
+
+$ cat /var/tmp/snenix002.json | python -m json.tool
+{
+    "server_cluster": "",
+    "server_clusternodes": "",
+    "server_cpu": "2 Socket(s) Intel Xeon CPU E5540 @ 2.53GHz/ 16 CPU(s)/ 4 Core(s) per socket",
+    "server_db": "",
+    "server_frame": "",
+    "server_ip": "10.168.90.103",
+    "server_memory": "32 GB",
+    "server_model": "ProLiant BL460c G6",
+    "server_name": "snenix002",
+    "server_release": "Red Hat Enterprise Linux Server release 6.8 (Santiago)",
+    "server_serial": "BRC952N120",
+    "server_site": "SNE",
+    "server_vendor": "HP",
+    "server_wwpn": ""
+}
 ```
 
 License
