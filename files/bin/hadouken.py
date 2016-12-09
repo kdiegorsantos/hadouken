@@ -27,12 +27,15 @@ if platform.system() == 'Linux':
         site = x.replace(my_domain, '').upper()[:3]
         if site in sites:
             return site
+        else:
+            site = 'None'
+            return site
 
     # get operation system release.
     def get_release():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["/usr/bin/lsb_release -d | gawk -F':' '{{print $2}}'"], stdout=subprocess.PIPE, shell=True, stderr=devnull)
+            ["lsb_release -d | gawk -F':' '{{print $2}}'"], stdout=subprocess.PIPE, shell=True, stderr=devnull)
         x = proc.communicate()[0]
         return x.strip()
 
@@ -40,7 +43,7 @@ if platform.system() == 'Linux':
     def get_hw_serialnumber():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["/usr/bin/dmidecode -s system-serial-number | egrep -v '^#'"], stdout=subprocess.PIPE,
+            ["dmidecode -s system-serial-number | egrep -v '^#'"], stdout=subprocess.PIPE,
             shell=True, stderr=devnull)
         x = proc.communicate()[0]
         return x.strip()
@@ -49,7 +52,7 @@ if platform.system() == 'Linux':
     def get_hw_vendor():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["/usr/bin/dmidecode -s system-manufacturer | egrep -v '^#'"], stdout=subprocess.PIPE,
+            ["dmidecode -s system-manufacturer | egrep -v '^#'"], stdout=subprocess.PIPE,
             shell=True, stderr=devnull)
         x = proc.communicate()[0]
         return x.strip()
@@ -58,7 +61,7 @@ if platform.system() == 'Linux':
     def get_hw_model():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["/usr/bin/dmidecode -s system-product-name | egrep -v '^#'"], stdout=subprocess.PIPE,
+            ["dmidecode -s system-product-name | egrep -v '^#'"], stdout=subprocess.PIPE,
             shell=True, stderr=devnull)
         x = proc.communicate()[0]
         return x.strip()
@@ -69,13 +72,17 @@ if platform.system() == 'Linux':
         proc = subprocess.Popen(
             ["cat /sys/class/fc_host/host*/port_name | xargs"], stdout=subprocess.PIPE, shell=True, stderr=devnull)
         x = proc.communicate()[0]
-        return str(x).strip().replace('0x', '')
+        if not x:
+            return str(x).strip().replace('0x', '')
+        else:
+            x = 'None'
+            return x
 
     # get ipv4 address.
     def get_ipaddr():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["/bin/ip addr show|egrep inet|awk '{{print $2}}'|awk -F'/' '{{print $1}}'|egrep -v '^127|::'|xargs"],
+            ["ip addr show|egrep inet|awk '{{print $2}}'|awk -F'/' '{{print $1}}'|egrep -v '^127|::'|xargs"],
             stdout=subprocess.PIPE, shell=True, stderr=devnull)
         x = proc.communicate()[0]
         return x.strip()
@@ -85,10 +92,14 @@ if platform.system() == 'Linux':
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
             ["[ -x /bin/powermt ] && /bin/powermt display ports|"
-             "gawk '{{print $1}}' | egrep '^[A-Z]+{2}[0-9]|[0-9]' | sort -u | xargs"], stdout=subprocess.PIPE,
+             "gawk '{{print $1}}' | egrep '^[A-Z]+{2}[0-9]|[0-9]'|sort -u|xargs || echo None"], stdout=subprocess.PIPE,
             shell=True, stderr=devnull)
         x = proc.communicate()[0]
-        return x.strip()
+        if not x:
+            return x.strip()
+        else:
+            x = 'None'
+            return x
 
     # get total memory in GB.
     def get_memory():
@@ -99,18 +110,23 @@ if platform.system() == 'Linux':
         x = proc.communicate()[0]
         y = str(x).strip().replace('kB', '')
         z = (int(y) / int(1024000))
-        return "%s GB" % z
+        if z == 0:
+            w = '<1' 
+            return "%s GB" % w
+        else:
+            return "%s GB" % z
 
     # get cpu info, physical and cores.
     def get_cpu():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["model=$(lscpu | egrep ^'Model name' | gawk -F\: '{{print$2}}' | xargs) \n"
-             "socket=$(lscpu | egrep ^'Socket' | gawk -F\: '{{print$2}}' | xargs \n"
-             "cpu=$(lscpu | egrep ^'CPU\(' | gawk -F\: '{{print$2}}' | xargs) \n"
-             "core=$(lscpu | egrep ^'Core' | gawk -F\: '{{print$2}}' | xargs) \n"
-             "echo -e ""$model / $socket Socket(s) / $cpu CPU(s) / $core Core(s) per Socket"""],
-            stdout=subprocess.PIPE, shell=True, stderr=devnull)
+            ["model=$(lscpu | egrep ^'Model name' | gawk -F\: '{{print$2}}') \n"
+             "socket=$(lscpu | egrep ^'Socket' | gawk -F\: '{{print$2}}') \n"
+             "cpu=$(lscpu | egrep ^'CPU\(' | gawk -F\: '{{print$2}}') \n"
+             "core=$(lscpu | egrep ^'Core' | gawk -F\: '{{print$2}}') \n"
+             "echo -e ""$model / $socket Socket\\(s\\) / $cpu CPU\\(s\\) / $core Core\\(s\\) per Socket"" | xargs"],
+            #stdout=subprocess.PIPE, shell=True, stderr = subprocess.STDOUT)
+            stdout=subprocess.PIPE, shell=True, stderr = devnull)
         x = proc.communicate()[0]
         return x.strip()
 
@@ -118,18 +134,26 @@ if platform.system() == 'Linux':
     def get_cluster():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(["[ -x /opt/VRTSvcs/bin/haclus ] && /opt/VRTSvcs/bin/haclus -state|"
-                                 "awk '{{print $1}}' | tail -n1"], stdout=subprocess.PIPE, shell=True, stderr=devnull)
+                                 "awk '{{print $1}}'|tail -n1 || echo None"], stdout=subprocess.PIPE, shell=True, stderr=devnull)
         x = proc.communicate()[0]
-        return x.strip()
+        if not x:
+            return x.strip()
+        else:
+            x = 'None'
+            return x
 
     # get the list of Veritas Cluster nodes.
     def get_clusternodes():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["[ -x /opt/VRTSvcs/bin/hasys ] && /opt/VRTSvcs/bin/hasys -list | xargs"],
+            ["[ -x /opt/VRTSvcs/bin/hasys ] && /opt/VRTSvcs/bin/hasys -list | xargs || echo None"],
             stdout=subprocess.PIPE, shell=True, stderr=devnull)
         x = proc.communicate()[0]
-        return x.strip()
+        if not x:
+            return x.strip()
+        else:
+            x = 'None'
+            return x
 
     # get the name of Oracle instances.
     def get_db():
@@ -138,7 +162,11 @@ if platform.system() == 'Linux':
             ["ps -ef | grep pmon | gawk -F\_ '{{print $3}}' | egrep -v '^$|\+ASM' | xargs"],
             stdout=subprocess.PIPE, shell=True, stderr=devnull)
         x = proc.communicate()[0]
-        return x.strip()
+        if not x:
+            return x.strip()
+        else:
+            x = 'None'
+            return x
 
     # print all information on the screen.
     print(
