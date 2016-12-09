@@ -11,7 +11,7 @@ except ImportError:
     import simplejson as json
 
 # if your server uses fqdn, you can suppress the domain, just change the bellow variable to your domain.
-my_domain = ".internal.timbrasil.com.br"
+my_domain = {{ domain }}
 
 # checks if operating system is Linux.
 if platform.system() == 'Linux':

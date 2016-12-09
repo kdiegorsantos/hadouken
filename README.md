@@ -29,16 +29,16 @@ On the ansible server install the package sqlite3 and create a new database.
 
 Installation on ansible server:
 ```sh
-$ sudo yum install sqlite3
+$ yum install sqlite3
 ```
 Installation on other servers:
 ```sh
-$ sudo yum install dmidecode
+$ yum install dmidecode
 ```
 
-Database creation:
+Database creation on ansible server (there's already a database on files/db folder, but if you want to create yours):
 ```sh
-$ sqlite3 files/db/db.sqlite < files/sql/create_db.sql
+$ sqlite3 /etc/ansible/roles/hadouken/files/db/db.sqlite < files/sql/create_db.sql
 ```
 
 Short example:
@@ -52,16 +52,26 @@ Install using ansible-galaxy.
 ```sh
 $ mkdir -p /etc/ansible/roles
 $ cd /etc/ansible/roles
-$ sudo ansible-galaxy install kdiegorsantos.hadouken
+$ ansible-galaxy install kdiegorsantos.hadouken
 ```
 
 Example Playbook
 ----------------
 
-After change the default variables you can run this role using the ansible-playbook command.
+Create a group in your hosts ansible file named hadouken and fill with desired hosts.
+```sh
+$ cat <EOF> /etc/ansible/hosts
+[hadouken]
+webserver
+dbserver
+EOF
+```
+
+
+After change the default domain variable you can run this role using the ansible-playbook command.
 
 ```sh
-$ sudo ansible-playbook /etc/ansible/roles/hadouken/role.yml
+$ ansible-playbook /etc/ansible/roles/hadouken/role.yml
 ```
 
 Example hadouken.py
