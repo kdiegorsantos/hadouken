@@ -35,7 +35,7 @@ if platform.system() == 'Linux':
     def get_release():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["lsb_release -d | gawk -F':' '{{print $2}}'"], stdout=subprocess.PIPE, shell=True, stderr=devnull)
+            ["lsb_release -d | awk -F':' '{{print $2}}'"], stdout=subprocess.PIPE, shell=True, stderr=devnull)
         x = proc.communicate()[0]
         return x.strip()
 
@@ -92,7 +92,7 @@ if platform.system() == 'Linux':
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
             ["[ -x /bin/powermt ] && /bin/powermt display ports|"
-             "gawk '{{print $1}}' | egrep '^[A-Z]+{2}[0-9]|[0-9]'|sort -u|xargs || echo None"], stdout=subprocess.PIPE,
+             "awk '{{print $1}}' | egrep '^[A-Z]+{2}[0-9]|[0-9]'|sort -u|xargs || echo None"], stdout=subprocess.PIPE,
             shell=True, stderr=devnull)
         x = proc.communicate()[0]
         if not x:
@@ -105,7 +105,7 @@ if platform.system() == 'Linux':
     def get_memory():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["egrep MemTotal /proc/meminfo | gawk -F':' '{{print $2}}'"], stdout=subprocess.PIPE, shell=True,
+            ["egrep MemTotal /proc/meminfo | awk -F':' '{{print $2}}'"], stdout=subprocess.PIPE, shell=True,
             stderr=devnull)
         x = proc.communicate()[0]
         y = str(x).strip().replace('kB', '')
@@ -120,10 +120,10 @@ if platform.system() == 'Linux':
     def get_cpu():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["model=$(lscpu | egrep ^'Model name' | gawk -F\: '{{print$2}}') \n"
-             "socket=$(lscpu | egrep ^'Socket' | gawk -F\: '{{print$2}}') \n"
-             "cpu=$(lscpu | egrep ^'CPU\(' | gawk -F\: '{{print$2}}') \n"
-             "core=$(lscpu | egrep ^'Core' | gawk -F\: '{{print$2}}') \n"
+            ["model=$(lscpu | egrep ^'Model name' | awk -F\: '{{print$2}}') \n"
+             "socket=$(lscpu | egrep ^'Socket' | awk -F\: '{{print$2}}') \n"
+             "cpu=$(lscpu | egrep ^'CPU\(' | awk -F\: '{{print$2}}') \n"
+             "core=$(lscpu | egrep ^'Core' | awk -F\: '{{print$2}}') \n"
              "echo -e ""$model / $socket Socket\\(s\\) / $cpu CPU\\(s\\) / $core Core\\(s\\) per Socket"" | xargs"],
             #stdout=subprocess.PIPE, shell=True, stderr = subprocess.STDOUT)
             stdout=subprocess.PIPE, shell=True, stderr = devnull)
@@ -159,7 +159,7 @@ if platform.system() == 'Linux':
     def get_db():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["ps -ef | grep pmon | gawk -F\_ '{{print $3}}' | egrep -v '^$|\+ASM' | xargs"],
+            ["ps -ef | grep pmon | awk -F\_ '{{print $3}}' | egrep -v '^$|\+ASM' | xargs"],
             stdout=subprocess.PIPE, shell=True, stderr=devnull)
         x = proc.communicate()[0]
         if not x:
