@@ -109,7 +109,7 @@ if platform.system() == 'Linux':
             stderr=devnull)
         x = proc.communicate()[0]
         y = str(x).strip().replace('kB', '')
-        z = (int(y) / int(1024000))
+        z = (int(y) / 1024000)
         if z == 0:
             w = '<1' 
             return "%s GB" % w
