@@ -45,6 +45,8 @@ Installation
 Install using ansible-galaxy.
 
 ```sh
+$ mkdir -p /etc/ansible/roles
+$ cd /etc/ansible/roles
 $ sudo ansible-galaxy install kdiegorsantos.hadouken
 ```
 

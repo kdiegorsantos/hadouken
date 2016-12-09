@@ -1,7 +1,5 @@
 #!/usr/bin/python2
 
-# Collect information about RHEL 5 or higher and Ubuntu 12.04 or higher, it was tested with python2.7.
-
 import os
 import platform
 import subprocess
@@ -42,7 +40,7 @@ if platform.system() == 'Linux':
     def get_hw_serialnumber():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["/usr/sbin/dmidecode -s system-serial-number | egrep -v '^#'"], stdout=subprocess.PIPE,
+            ["/usr/bin/dmidecode -s system-serial-number | egrep -v '^#'"], stdout=subprocess.PIPE,
             shell=True, stderr=devnull)
         x = proc.communicate()[0]
         return x.strip()
@@ -51,7 +49,7 @@ if platform.system() == 'Linux':
     def get_hw_vendor():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["/usr/sbin/dmidecode -s system-manufacturer | egrep -v '^#'"], stdout=subprocess.PIPE,
+            ["/usr/bin/dmidecode -s system-manufacturer | egrep -v '^#'"], stdout=subprocess.PIPE,
             shell=True, stderr=devnull)
         x = proc.communicate()[0]
         return x.strip()
@@ -60,7 +58,7 @@ if platform.system() == 'Linux':
     def get_hw_model():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["/usr/sbin/dmidecode -s system-product-name | egrep -v '^#'"], stdout=subprocess.PIPE,
+            ["/usr/bin/dmidecode -s system-product-name | egrep -v '^#'"], stdout=subprocess.PIPE,
             shell=True, stderr=devnull)
         x = proc.communicate()[0]
         return x.strip()
@@ -77,7 +75,7 @@ if platform.system() == 'Linux':
     def get_ipaddr():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["/sbin/ip addr show|egrep inet|awk '{{print $2}}'|awk -F'/' '{{print $1}}'|egrep -v '^127|::'|xargs"],
+            ["/bin/ip addr show|egrep inet|awk '{{print $2}}'|awk -F'/' '{{print $1}}'|egrep -v '^127|::'|xargs"],
             stdout=subprocess.PIPE, shell=True, stderr=devnull)
         x = proc.communicate()[0]
         return x.strip()
@@ -86,7 +84,7 @@ if platform.system() == 'Linux':
     def get_frame():
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen(
-            ["[ -x /sbin/powermt ] && /sbin/powermt display ports|"
+            ["[ -x /bin/powermt ] && /bin/powermt display ports|"
              "gawk '{{print $1}}' | egrep '^[A-Z]+{2}[0-9]|[0-9]' | sort -u | xargs"], stdout=subprocess.PIPE,
             shell=True, stderr=devnull)
         x = proc.communicate()[0]

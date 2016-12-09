@@ -1,13 +1,13 @@
 ---
 - name: Copying hadouken.py script
-  copy: src=/etc/ansible/files/bin/hadouken.py dest=/usr/local/sbin/hadouken.py mode=0775 owner=root
+  copy: src=/etc/ansible/roles/hadouken/files/bin/hadouken.py dest=/usr/local/bin/hadouken.py mode=0775 owner=root
 
 - name: Executing hadouken.py
-  command: /usr/local/sbin/hadouken.py
+  command: /usr/local/bin/hadouken.py
 
 - name: Fetching hadouken json file
-  fetch: src=/var/tmp/{{ ansible_hostname }}.json dest=/etc/ansible/files/json/ flat=yes
+  fetch: src=/var/tmp/{{ ansible_hostname }}.json dest=/etc/ansible/roles/hadouken/files/json/ flat=yes
 
 - name: Updating database
-  local_action: command /etc/ansible/files/bin/db.py
+  local_action: command /etc/ansible/roles/hadouken/files/bin/db.py
 
