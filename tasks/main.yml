@@ -1,0 +1,3 @@
+tasks:
+  - copy: src=/etc/ansible/files/bin/hadouken.py dest=/usr/local/sbin/hadouken.py mode=0775 owner=root" 
+  - fetch: src=/var/tmp/{{ ansible_hostname }}.json dest=/etc/ansible/files/json/ flat=yes
