@@ -86,7 +86,7 @@ server_frame: 000290102907 000592600076 000595700007 000595700008 CKM00154803864
 server_wwpn: 10006c3be5b076f1 10006c3be5b076f5 
 server_db: None
 ```
-If you want to show the content of a json file generatedby hadouken.py.
+If you want to display the content of a json file generatedby hadouken.py.
 
 ```sh
 
@@ -107,6 +107,19 @@ $ cat /var/tmp/snenix002.json | python -m json.tool
     "server_vendor": "HP",
     "server_wwpn": ""
 }
+```
+
+Example db.sqlite
+----------------
+
+If you want to query information about a host.
+
+```sh
+$ sqlite3 -header -column /etc/ansible/roles/files/db/db.sqlite "select * from info where server_name = 'snelnxa72'"
+server_id   server_name  server_release                                          server_site  server_vendor  server_model        server_serial  server_cpu                                                                   server_memory  server_ip      server_cluster  server_clusternodes  server_frame  server_wwpn  server_db   server_owner  server_rack  server_console  last_update
+----------  -----------  ------------------------------------------------------  -----------  -------------  ------------------  -------------  ---------------------------------------------------------------------------  -------------  -------------  --------------  -------------------  ------------  -----------  ----------  ------------  -----------  --------------  -----------
+1           snenix002    Red Hat Enterprise Linux Server release 6.8 (Santiago)  SNE          HP             ProLiant BL460c G6  BRC952N120     2 Socket(s) Intel Xeon CPU E5540 @ 2.53GHz/ 16 CPU(s)/ 4 Core(s) per socket  32 GB          10.168.90.103                                                                                                                         2016-09-23 
+
 ```
 
 License
