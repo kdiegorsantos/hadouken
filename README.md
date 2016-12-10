@@ -55,7 +55,7 @@ mkdir -p /etc/ansible/roles && cd /etc/ansible/roles && ansible-galaxy install k
 Create a group in your hosts ansible file named hadouken and fill with desired hosts.
 
 ```bash
-cat <EOF> /etc/ansible/hosts
+cat <<EOF>> /etc/ansible/hosts
 [hadouken]
 webserver
 dbserver
