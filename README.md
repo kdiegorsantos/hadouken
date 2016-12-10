@@ -169,6 +169,8 @@ sqlite3 -header -column /etc/ansible/roles/files/db/db.sqlite "select * from inf
 server_id   server_name  server_release                                          server_site  server_vendor  server_model        server_serial  server_cpu                                                                   server_memory  server_ip      server_cluster  server_clusternodes  server_frame  server_wwpn  server_db   server_owner  server_rack  server_console  last_update
 ----------  -----------  ------------------------------------------------------  -----------  -------------  ------------------  -------------  ---------------------------------------------------------------------------  -------------  -------------  --------------  -------------------  ------------  -----------  ----------  ------------  -----------  --------------  -----------
 1           snenix002    Red Hat Enterprise Linux Server release 6.8 (Santiago)  SNE          HP             ProLiant BL460c G6  BRC952N120     2 Socket(s) Intel Xeon CPU E5540 @ 2.53GHz/ 16 CPU(s)/ 4 Core(s) per socket  32 GB          10.168.90.103                                                                                                                         2016-09-23 
+```
+
 ----
 
 ## License
