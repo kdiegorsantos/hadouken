@@ -20,7 +20,6 @@ This application supports.
 + Red Hat Enterprise Linux
 + EMC Storage
 + Veritas InfoScale
-+ Veritas Cluster Server
 + Any virtual or physical hardware
 
 Requirements
