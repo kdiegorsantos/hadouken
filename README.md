@@ -7,20 +7,15 @@
 
 # [hadouken](https://github.com/kdiegorsantos/hadouken)
 
-This ansible role was builded to collect information about hardware and software from Linux servers and insert this informations on a sqlite3 database.
+This ansible role collect information about hardware and software from Linux servers and insert this informations on a sqlite3 database.
 
-There is ansible tasks to.
+The process happens in three phases.
 
 - Distribute and execute hadouken.py
 - Collect the json file that hadouken.py generates
 - Execute update-db.py to load json info in the database
 
-This application was made to run and collect information about.
-
-- Red Hat Enterprise Linux
-- EMC Storage
-- Veritas InfoScale and Cluster Server
-- Any virtual or physical hardware
+I included commands to collect information about EMC Storage, Veritas InfoScale and Cluster Server instead.
 
 ----
 
