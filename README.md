@@ -13,7 +13,7 @@ There is ansible tasks to.
 
 - Distribute and execute hadouken.py
 - Collect the json file that hadouken.py generates
-- Execute db.py to load json info in the database
+- Execute update-db.py to load json info in the database
 
 This application was made to run and collect information about.
 
@@ -174,11 +174,4 @@ server_id   server_name  server_release                                         
 ## License
 
 This project is licensed under the MIT license. See included LICENSE.md.
-
-Author Information
-
--------
-
-- Diego R. Santos
-- [github.com](https://github.com/kdiegorsantos)
 
