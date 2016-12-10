@@ -7,7 +7,7 @@
 
 # [hadouken](https://github.com/kdiegorsantos/hadouken)
 
-This ansible role collect information about hardware and software from Linux servers and insert this informations on a sqlite3 database.
+This ansible role collects information about hardware and software from Linux servers, then inserts this information on a sqlite3 database.
 
 The process happens in three phases.
 
@@ -15,7 +15,7 @@ The process happens in three phases.
 - Collect the json file that hadouken.py generates
 - Execute update-db.py to load json info in the database
 
-I included commands to collect information about EMC Storage, Veritas InfoScale and Cluster Server instead.
+I also included commands that collects information about EMC Storage, Veritas InfoScale and Cluster Server.
 
 ----
 
@@ -24,7 +24,6 @@ I included commands to collect information about EMC Storage, Veritas InfoScale 
 On ansible server.
 
 - ansible 1.4 or higher
-- python 2.7
 - sqlite3
 
 ```bash
@@ -33,7 +32,6 @@ yum install ansible sqlite3
 
 On other servers.
 
-- python 2.7
 - dmidecode
 
 ```bash
@@ -55,6 +53,7 @@ mkdir -p /etc/ansible/roles && cd /etc/ansible/roles && ansible-galaxy install k
 ## Configuration
 
 Create a group in your hosts ansible file named hadouken and fill with desired hosts.
+
 ```bash
 cat <EOF> /etc/ansible/hosts
 [hadouken]
