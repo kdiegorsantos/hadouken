@@ -81,7 +81,7 @@ if platform.system() == 'Linux':
             "socket=$(lscpu | egrep ^'Socket' | awk -F\: '{{print$2}}')\n" \
             "cpu=$(lscpu | egrep ^'CPU\(' | awk -F\: '{{print$2}}')\n" \
             "core=$(lscpu | egrep ^'Core' | awk -F\: '{{print$2}}')\n" \
-            "echo -e ""$model / $socket Socket\\(s\\) / $cpu CPU\\(s\\) / $core Core\\(s\\) per Socket"""
+            "echo ""$model / $socket Socket\\(s\\) / $cpu CPU\\(s\\) / $core Core\\(s\\) per Socket"""
         return SubprocessPopen(k)
 
     # display information about Veritas InforScale and Cluster Server.
