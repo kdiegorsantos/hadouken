@@ -33,9 +33,11 @@ yum install ansible sqlite3
 On other servers.
 
 - dmidecode
+- lsb
+- python
 
 ```bash
-yum install dmidecode
+dnf install dmidecode lsb python
 ``` 
 
 ----
