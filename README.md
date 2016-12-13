@@ -67,8 +67,8 @@ EOF
 Change the default domain variable on defaults/main.yml.
 
 ```bash
-cat <EOF> /etc/ansible/roles/hadouken/defaults/main.yml
-domain: mydomain.com
+cat <EOF> /etc/ansible/roles/kdiegorsantos.hadouken/defaults/main.yml
+domain: .mydomain.com
 EOF
 ```
 
@@ -81,7 +81,7 @@ EOF
 Run this ansible role using the ansible-playbook command.
 
 ```bash
-ansible-playbook /etc/ansible/roles/hadouken/role.yml
+ansible-playbook /etc/ansible/roles/kdiegorsantos.hadouken/role.yml
 ```
 
 - hadouken.py
@@ -134,7 +134,7 @@ cat /var/tmp/snenix002.json | python -m json.tool
 Run sql commands in a easy way using query-db.sh, just give an argument to begin the search.
 
 ```bash
-/etc/ansible/roles/hadouken/files/bin/query-db.sh BRC50966F0
+/etc/ansible/roles/kdiegorsantos.hadouken/files/bin/query-db.sh BRC50966F0
           server_id = 946
         server_name = rjolnxc15
      server_release = Red Hat Enterprise Linux Server release 6.5 (Santiago)
@@ -161,7 +161,7 @@ server_clusternodes =
 Run sql commands using sqlite3.
 
 ```bash
-sqlite3 -header -column /etc/ansible/roles/files/db/db.sqlite "select * from info where server_name = 'snelnxa72'"
+sqlite3 -header -column /etc/ansible/roles/kdiegorsantos.hadouken/files/db/db.sqlite "select * from info where server_name = 'snelnxa72'"
 server_id   server_name  server_release                                          server_site  server_vendor  server_model        server_serial  server_cpu                                                                   server_memory  server_ip      server_cluster  server_clusternodes  server_frame  server_wwpn  server_db   server_owner  server_rack  server_console  last_update
 ----------  -----------  ------------------------------------------------------  -----------  -------------  ------------------  -------------  ---------------------------------------------------------------------------  -------------  -------------  --------------  -------------------  ------------  -----------  ----------  ------------  -----------  --------------  -----------
 1           snenix002    Red Hat Enterprise Linux Server release 6.8 (Santiago)  SNE          HP             ProLiant BL460c G6  BRC952N120     2 Socket(s) Intel Xeon CPU E5540 @ 2.53GHz/ 16 CPU(s)/ 4 Core(s) per socket  32 GB          10.168.90.103                                                                                                                         2016-09-23 
