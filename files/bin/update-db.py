@@ -9,7 +9,7 @@ import json
 my_project = '/etc/ansible/roles/kdiegorsantos.hadouken/files'
 
 # find all json files and loads it on sqlite db.
-for each in os.listdir('%s/json/' % my_project):
+for each in os.listdir('%s/files/json/' % my_project):
     if each.endswith('.json'):
         os.chdir(r'%s/json/' % my_project)
         with open(each) as fp:
