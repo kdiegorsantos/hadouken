@@ -27,7 +27,7 @@ On ansible server.
 - sqlite3
 
 ```bash
-yum install ansible sqlite3
+dnf install ansible sqlite3
 ```
 
 On other servers.
