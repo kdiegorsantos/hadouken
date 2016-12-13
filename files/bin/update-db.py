@@ -6,7 +6,7 @@ import sqlite3
 import json
 
 # all need files is in project directory.
-my_project = '/etc/ansible/hadouken/files'
+my_project = '/etc/ansible/roles/hadouken/files'
 
 # find all json files and loads it on sqlite db.
 for each in os.listdir('%s/json/' % my_project):
