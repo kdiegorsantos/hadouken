@@ -1,4 +1,5 @@
 #!/usr/bin/python2
+# -*- coding: UTF-8 -*-
 
 import os
 import platform
@@ -11,11 +12,11 @@ except ImportError:
     import simplejson as json
 
 # if your server uses fqdn, you can suppress the domain, just change the bellow variable to your domain.
-my_domain = ''
+my_domain = {{ domain }}
 
 # checks if operating system is Linux.
 if platform.system() == 'Linux':
-    # subprocess funciton, pass an argument as k variable to it.
+    # subprocess funciton, pass a operation system command as k variable.
     def SubprocessPopen(k):
         devnull = open(os.devnull, 'w')
         proc = subprocess.Popen([k], stdout=subprocess.PIPE, shell=True, stderr=devnull)
