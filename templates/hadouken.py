@@ -12,7 +12,7 @@ except ImportError:
     import simplejson as json
 
 # if your server uses fqdn, you can suppress the domain, just change the bellow variable to your domain.
-my_domain = {{ domain }}
+my_domain = 'localdomain'
 
 # checks if operating system is Linux.
 if platform.system() == 'Linux':
@@ -26,15 +26,17 @@ if platform.system() == 'Linux':
     # display hostname
     def display_hostname():
         x = platform.node()
-        return x.replace(my_domain, '').lower()
+        return x.replace(my_domain, '').replace('.',  '').lower()
 
     # in my case the first 3 letters of the hostname indicates the site location, change if you want.
     def display_site():
         sites = ('SNE', 'RJO', 'BFC')
         x = platform.node()
-        site = x.replace(my_domain, '').upper()[:3]
+        site = x.upper()[:3]
         if site in sites:
             return site
+        else:
+            return ''
 
     # display operation system release.
     def display_release():
