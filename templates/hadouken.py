@@ -60,17 +60,17 @@ if platform.system() == 'Linux':
 
     # display fibre channel id wwpn.
     def display_fc_wwpn():
-        k = "cat /sys/class/fc_host/host*/port_name"
+        k = "cat /sys/class/fc_host/host*/port_name|xargs"
         return SubprocessPopen(k.strip().replace('0x', ''))
 
     # display ipv4 address.
     def display_ipaddr():
-        k = "ip addr show | egrep inet | awk '{{print $2}}' | awk -F'/' '{{print $1}}' | egrep -v '^127|::'"
+        k = "ip addr show | egrep inet | awk '{{print $2}}' | awk -F'/' '{{print $1}}' | egrep -v '^127|::'|xargs"
         return SubprocessPopen(k.strip())
 
     # display EMC storage id.
     def display_frame():
-        k = "powermt display ports | awk '{{print $1}}' | egrep '^[A-Z]+{2}[0-9]|[0-9]' | sort -u"
+        k = "powermt display ports | awk '{{print $1}}' | egrep '^[A-Z]+{2}[0-9]|[0-9]' | sort -u|xargs"
         return SubprocessPopen(k.strip())
 
     # display total memory in MB.
